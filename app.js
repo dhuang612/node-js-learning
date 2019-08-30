@@ -6,13 +6,35 @@ const printMsg = getNotes();
 //customize yargs version
 yargs.version('1.1.0');
 
+//challenge add an option to yargs
+//setup a body option for the add command
+//configure a description, and make it required, and for it to be a string.
+//log the body value in the handler function
+//test work
+
 //create add command
 
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
-  handler: function() {
-    console.log('add a new note!');
+  //this is an object that contains the logic for this command
+  builder: {
+    title: {
+      describe: 'Note title',
+      //option to make this param required
+      demandOption: true,
+      type: 'string'
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: function({ title, body }) {
+    console.log('Title: ' + title);
+    console.log('Body: ' + body);
+    //
   }
 });
 
@@ -38,10 +60,8 @@ yargs.command({
   command: 'read',
   describe: 'read note',
   handler: function() {
-    console.log('reading note');
+    console.log('reading a note');
   }
 });
-//challenge add two new commands
-//setup command to support 'list' command
-//setup command to support 'read command
-console.log(yargs.argv);
+//parses the arguments and returns them
+yargs.parse();
