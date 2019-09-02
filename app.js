@@ -6,18 +6,12 @@ const notes = require('./notes.js');
 //customize yargs version
 yargs.version('1.1.0');
 
-//challenge add an option to yargs
-//setup a body option for the add command
-//configure a description, and make it required, and for it to be a string.
-//log the body value in the handler function
-//test work
-
 //create add command
 
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
-  //this is an object that contains the logic for this command
+  //this is an object that contains the options for this command
   builder: {
     title: {
       describe: 'Note title',
@@ -41,8 +35,15 @@ yargs.command({
 yargs.command({
   command: 'remove',
   describe: 'removes a note',
-  handler: function() {
-    console.log('removing the note');
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: function({ title }) {
+    notes.removeNote(title);
   }
 });
 //create list command
