@@ -1,8 +1,8 @@
-const getNotes = require('./notes');
 const chalk = require('chalk');
-//helps you to build an interactive command line tool
 const yargs = require('yargs');
-const printMsg = getNotes();
+const notes = require('./notes.js');
+//helps you to build an interactive command line tool
+
 //customize yargs version
 yargs.version('1.1.0');
 
@@ -32,8 +32,7 @@ yargs.command({
     }
   },
   handler: function({ title, body }) {
-    console.log('Title: ' + title);
-    console.log('Body: ' + body);
+    notes.addNote(title, body);
     //
   }
 });
