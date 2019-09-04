@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const yargs = require('yargs');
 const notes = require('./notes.js');
 //helps you to build an interactive command line tool
@@ -25,7 +24,7 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: function({ title, body }) {
+  handler({ title, body }) {
     notes.addNote(title, body);
     //
   }
@@ -42,7 +41,7 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: function({ title }) {
+  handler({ title }) {
     notes.removeNote(title);
   }
 });
@@ -50,7 +49,7 @@ yargs.command({
 yargs.command({
   command: 'list',
   describe: 'List all notes',
-  handler: function() {
+  handler() {
     console.log('listing all notes');
   }
 });
@@ -59,7 +58,7 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'read note',
-  handler: function() {
+  handler() {
     console.log('reading a note');
   }
 });

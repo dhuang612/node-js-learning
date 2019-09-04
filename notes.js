@@ -1,6 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const getNotes = function(title, body) {
+const getNotes = (title, body) => {
   return 'Your notes..';
 };
 
@@ -11,7 +11,7 @@ challenge use chalk to provide useful logs for remove
 */
 
 //function to remove note
-const removeNote = function(title) {
+const removeNote = title => {
   //load in existing note
   const notes = loadNotes();
   const notesToKeep = notes.filter(note => {
@@ -27,13 +27,12 @@ const removeNote = function(title) {
 };
 
 //function to add a note along with logic to check if title exists
-const addNote = function(title, body) {
+const addNote = (title, body) => {
   //load in existing notes
   const notes = loadNotes();
   //compare new note title with existing
   const duplicateNotes = notes.filter(item => {
-    //if one matches add it to duplicateNotes
-    return item.title === title;
+    item.title === title;
   });
   if (duplicateNotes.length === 0) {
     notes.push({
@@ -47,13 +46,13 @@ const addNote = function(title, body) {
   }
 };
 //save note to notes.json
-const saveNotes = function(notes) {
+const saveNotes = notes => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
 };
 
 //need the file to exist and have json
-const loadNotes = function() {
+const loadNotes = () => {
   //defensive code
   try {
     const dataBuffer = fs.readFileSync('notes.json');
