@@ -31,9 +31,9 @@ const listNotes = () => {
 const addNote = (title, body) => {
   //load in existing notes
   const notes = loadNotes();
-  //compare new note title with existing
-  const duplicateNotes = notes.filter(item => item.title === title);
-  if (duplicateNotes.length === 0) {
+  //compare new note title with existing using find because it stops after first duplicate
+  const duplicateNote = notes.find(note => note.title === title);
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body
@@ -43,6 +43,14 @@ const addNote = (title, body) => {
   } else {
     console.log(chalk.red.inverse('Note title taken!'));
   }
+};
+
+const readNote = title => {
+  const notes = loadNotes();
+  const findNote = notes.find(note => note.title === title);
+  if (findNote) {
+    console.log(chalk.inverse(findNote.title), findNote.body);
+  } else console.log(chalk.red.inverse('no note found!'));
 };
 //save note to notes.json
 const saveNotes = notes => {
@@ -66,5 +74,6 @@ module.exports = {
   getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
-  listNotes: listNotes
+  listNotes: listNotes,
+  readNote: readNote
 };

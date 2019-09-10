@@ -5,15 +5,7 @@ const notes = require('./notes.js');
 //customize yargs version
 yargs.version('1.1.0');
 
-//challenge
-//create and epxort listNotes from notes.js
-// 'Your notes' using chalk
-//use foreach
-// Call listNotes from command handler
-//test work
-
 //create add command
-
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
@@ -56,12 +48,6 @@ yargs.command({
 yargs.command({
   command: 'list',
   describe: 'List all notes',
-  builder: {
-    title: {
-      describe: 'All notes',
-      type: 'string'
-    }
-  },
   handler() {
     notes.listNotes();
   }
@@ -71,8 +57,15 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'read note',
-  handler() {
-    console.log('reading a note');
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler({ title }) {
+    notes.readNote(title);
   }
 });
 //parses the arguments and returns them
