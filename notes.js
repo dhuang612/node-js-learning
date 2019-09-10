@@ -1,14 +1,8 @@
 const fs = require('fs');
 const chalk = require('chalk');
 const getNotes = (title, body) => {
-  return 'Your notes..';
+  return 'Your notes...';
 };
-
-/*
-challenge use chalk to provide useful logs for remove
-//if a note is removed print "Note removed!" with a green background
-//if no note is removed print no note found with a red background
-*/
 
 //function to remove note
 const removeNote = title => {
@@ -26,14 +20,19 @@ const removeNote = title => {
   }
 };
 
+const listNotes = () => {
+  const notes = loadNotes();
+  const allNotes = notes.forEach(note => {
+    console.log(chalk.green.inverse(note.title));
+  });
+};
+
 //function to add a note along with logic to check if title exists
 const addNote = (title, body) => {
   //load in existing notes
   const notes = loadNotes();
   //compare new note title with existing
-  const duplicateNotes = notes.filter(item => {
-    item.title === title;
-  });
+  const duplicateNotes = notes.filter(item => item.title === title);
   if (duplicateNotes.length === 0) {
     notes.push({
       title: title,
@@ -66,5 +65,6 @@ const loadNotes = () => {
 module.exports = {
   getNotes: getNotes,
   addNote: addNote,
-  removeNote: removeNote
+  removeNote: removeNote,
+  listNotes: listNotes
 };

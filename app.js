@@ -5,6 +5,13 @@ const notes = require('./notes.js');
 //customize yargs version
 yargs.version('1.1.0');
 
+//challenge
+//create and epxort listNotes from notes.js
+// 'Your notes' using chalk
+//use foreach
+// Call listNotes from command handler
+//test work
+
 //create add command
 
 yargs.command({
@@ -49,8 +56,14 @@ yargs.command({
 yargs.command({
   command: 'list',
   describe: 'List all notes',
+  builder: {
+    title: {
+      describe: 'All notes',
+      type: 'string'
+    }
+  },
   handler() {
-    console.log('listing all notes');
+    notes.listNotes();
   }
 });
 //create read note command
